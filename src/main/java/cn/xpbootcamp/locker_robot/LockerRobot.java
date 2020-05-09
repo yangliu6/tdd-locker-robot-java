@@ -1,17 +1,18 @@
 package cn.xpbootcamp.locker_robot;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LockerRobot {
 
-    List<Bag> bags;
+    List<Box> boxes;
     public LockerRobot(int size) {
-        bags = new ArrayList<>(size);
+        boxes = new ArrayList<>(Collections.nCopies(size, new Box()));
     }
 
     public Ticket store(Bag bag) {
-        bags.add(bag);
-        return new Ticket("password");
+        boolean succeed = boxes.stream().anyMatch(box -> box.storeBag(bag));
+        return succeed ? new Ticket("password") : null;
     }
 }
