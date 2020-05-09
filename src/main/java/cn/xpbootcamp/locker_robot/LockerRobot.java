@@ -20,20 +20,29 @@ public class LockerRobot {
                 break;
             }
         }
-
         return index != -1 ? generateTicket(index) : null;
     }
 
     private Ticket generateTicket(int index) {
         Random rand = new Random();
         int key = rand.nextInt(1000000);
+        while (keyStore.get(key) != null)
+            key = rand.nextInt(1000000);
+
         keyStore.put(key, index);
-        return new Ticket(String.format("%06d", key));
+        return new Ticket(key);
     }
 
     public Bag takeOut(Ticket ticket) {
-        int key = Integer.parseInt(ticket.getPassword());
+        if (ticket == null || ticket.getPassword() == null)
+            return null;
+
+        int key = ticket.getPassword();
         Integer index = keyStore.get(key);
-        return index != null ? boxes.get(index).takeOut() : null;
+        if (index != null) {
+            keyStore.remove(key);
+            return boxes.get(index).takeOut();
+        }
+        return null;
     }
 }

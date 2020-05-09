@@ -9,5 +9,5 @@
 
 2. 取包
 
-   - [ ] 给正确的Ticket，成功取出对应的包且Ticket作废
-   - [ ] Ticket不对/不给Ticket，无法取包
+   - [X] 给正确的Ticket，成功取出对应的包且Ticket作废
+   - [X] Ticket不对，过期/不给Ticket，无法取包

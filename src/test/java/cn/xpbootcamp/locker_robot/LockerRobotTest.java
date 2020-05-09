@@ -35,4 +35,28 @@ public class LockerRobotTest {
         Assertions.assertEquals(bag1, bag2);
         Assertions.assertEquals("my bag", bag2.getName());
     }
+
+    @Test
+    void should_not_get_bag_when_get_package_given_wrong_ticket() {
+        LockerRobot lockerRobot = new LockerRobot(10);
+        Bag bag1 = new Bag("my bag");
+        Ticket ticket = lockerRobot.store(bag1);
+
+        // ticket == null
+        Assertions.assertNull(lockerRobot.takeOut(null));
+
+        // ticket.password == null
+        Assertions.assertNull(lockerRobot.takeOut(new Ticket(null)));
+
+        // ticket password is wrong
+        Ticket wrongTicket = new Ticket(ticket.getPassword()+ 1231);
+        Assertions.assertNull(lockerRobot.takeOut(wrongTicket));
+
+        Bag bag2 = lockerRobot.takeOut(ticket);
+        Assertions.assertEquals(bag1, bag2);
+        Assertions.assertEquals("my bag", bag2.getName());
+
+        // expired ticket
+        Assertions.assertNull(lockerRobot.takeOut(ticket));
+    }
 }
