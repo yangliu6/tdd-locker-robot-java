@@ -1,17 +1,17 @@
 package cn.xpbootcamp.locker_robot;
 
 public class Ticket {
-    private Integer password;
+    private String password;
 
-    public Ticket(Integer password) {
+    public Ticket(String password) {
         this.password = password;
     }
 
-    public Integer getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(Integer password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 }

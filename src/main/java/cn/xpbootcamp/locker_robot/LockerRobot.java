@@ -5,7 +5,7 @@ import java.util.*;
 public class LockerRobot {
 
     List<Box> boxes;
-    Map<Integer, Integer> keyStore;
+    Map<String, Integer> keyStore;
 
     public LockerRobot(int size) {
         boxes = new ArrayList<>(Collections.nCopies(size, new Box()));
@@ -24,10 +24,7 @@ public class LockerRobot {
     }
 
     private Ticket generateTicket(int index) {
-        Random rand = new Random();
-        int key = rand.nextInt(1000000);
-        while (keyStore.get(key) != null)
-            key = rand.nextInt(1000000);
+        String key = UUID.randomUUID().toString();
 
         keyStore.put(key, index);
         return new Ticket(key);
@@ -37,7 +34,7 @@ public class LockerRobot {
         if (ticket == null || ticket.getPassword() == null)
             return null;
 
-        int key = ticket.getPassword();
+        String key = ticket.getPassword();
         Integer index = keyStore.get(key);
         if (index != null) {
             keyStore.remove(key);
