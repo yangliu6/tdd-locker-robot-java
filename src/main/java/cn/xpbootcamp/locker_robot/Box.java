@@ -23,4 +23,10 @@ public class Box {
             return false;
         }
     }
+
+    Bag takeOut() {
+        Bag bag = getBag();
+        setBag(null);
+        return bag;
+    }
 }

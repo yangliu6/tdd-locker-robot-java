@@ -33,5 +33,6 @@ public class LockerRobotTest {
 
         Bag bag2 = lockerRobot.takeOut(ticket);
         Assertions.assertEquals(bag1, bag2);
+        Assertions.assertEquals("my bag", bag2.getName());
     }
 }
