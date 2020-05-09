@@ -24,4 +24,14 @@ public class LockerRobotTest {
         Ticket anotherTicket = lockerRobot.store(anotherBag);
         Assertions.assertNull(anotherTicket);
     }
+
+    @Test
+    void should_return_bag_when_get_package_given_right_ticket() {
+        LockerRobot lockerRobot = new LockerRobot(10);
+        Bag bag1 = new Bag("my bag");
+        Ticket ticket = lockerRobot.store(bag1);
+
+        Bag bag2 = lockerRobot.takeOut(ticket);
+        Assertions.assertEquals(bag1, bag2);
+    }
 }
