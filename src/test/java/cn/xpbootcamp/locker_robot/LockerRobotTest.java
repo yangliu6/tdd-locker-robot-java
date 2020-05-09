@@ -2,7 +2,6 @@ package cn.xpbootcamp.locker_robot;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import sun.security.krb5.internal.Ticket;
 
 public class LockerRobotTest {
 
