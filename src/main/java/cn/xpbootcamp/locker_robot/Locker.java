@@ -1,18 +1,21 @@
 package cn.xpbootcamp.locker_robot;
 
+import cn.xpbootcamp.locker_robot.exception.InvalidTicketException;
+import cn.xpbootcamp.locker_robot.exception.NoAvailableLockerBoxException;
+
 import java.util.*;
 
-public class LockerRobot {
+public class Locker {
 
     List<Box> boxes;
     Map<String, Integer> keyStore;
 
-    public LockerRobot(int size) {
+    public Locker(int size) {
         boxes = new ArrayList<>(Collections.nCopies(size, new Box()));
         keyStore = new HashMap<>();
     }
 
-    public Ticket store(Bag bag) {
+    public Ticket store(Bag bag) throws NoAvailableLockerBoxException {
         int index = -1;
         for (int i = 0; i < boxes.size(); i++) {
             if (boxes.get(i).storeBag(bag)) {
@@ -20,7 +23,12 @@ public class LockerRobot {
                 break;
             }
         }
-        return index != -1 ? generateTicket(index) : null;
+        if(index != -1){
+            return generateTicket(index);
+        }
+        else {
+            throw new NoAvailableLockerBoxException("Locker is full");
+        }
     }
 
     private Ticket generateTicket(int index) {
@@ -30,16 +38,17 @@ public class LockerRobot {
         return new Ticket(key);
     }
 
-    public Bag takeOut(Ticket ticket) {
+    public Bag takeOut(Ticket ticket) throws InvalidTicketException {
         if (ticket == null || ticket.getPassword() == null)
-            return null;
+            throw new InvalidTicketException("Invalid Ticket");
 
         String key = ticket.getPassword();
         Integer index = keyStore.get(key);
         if (index != null) {
             keyStore.remove(key);
             return boxes.get(index).takeOut();
+        } else {
+            throw new InvalidTicketException("Invalid Ticket");
         }
-        return null;
     }
 }
