@@ -1,6 +1,8 @@
 package cn.xpbootcamp.locker_robot;
 
+import cn.xpbootcamp.locker_robot.exception.InvalidTicketException;
 import cn.xpbootcamp.locker_robot.exception.NoAvailableLockerBoxException;
+import cn.xpbootcamp.locker_robot.exception.NoAvailableLockerException;
 import java.util.*;
 
 public class Robot {
@@ -17,7 +19,7 @@ public class Robot {
         lockers.add(locker);
     }
 
-    public Ticket store(Bag bag) throws NoAvailableLockerBoxException {
+    public Ticket store(Bag bag) throws NoAvailableLockerException, NoAvailableLockerBoxException {
         for (Locker locker : lockers) {
             if (locker.isAvailable()) {
                 Ticket ticket = locker.store(bag);
@@ -25,7 +27,7 @@ public class Robot {
                 return ticket;
             }
         }
-        return new Ticket();
+        throw new NoAvailableLockerException("No locker available");
     }
 
     public Locker getLockerWithTicket(Ticket ticket) {
