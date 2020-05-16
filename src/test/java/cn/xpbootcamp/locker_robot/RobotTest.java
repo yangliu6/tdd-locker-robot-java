@@ -51,4 +51,17 @@ class RobotTest {
         NoAvailableLockerException exception = Assertions.assertThrows(NoAvailableLockerException.class, () -> robot.store(bag));
         assertEquals("No locker available", exception.getMessage());
     }
+
+    @Test
+    void should_return_package_when_get_package_given_right_ticket()
+            throws NoAvailableLockerBoxException, NoAvailableLockerException {
+        Robot robot = new Robot();
+        Locker locker = new Locker(1);
+        robot.add(locker);
+        Bag storedBag = new Bag();
+        Ticket  ticket = robot.store(storedBag);
+
+        Bag bag = robot.getBagWithTicket(ticket);
+        Assertions.assertEquals(storedBag, bag);
+    }
 }
