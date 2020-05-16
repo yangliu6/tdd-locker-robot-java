@@ -57,13 +57,31 @@ class RobotTest {
     void should_return_package_when_get_package_given_right_ticket()
             throws NoAvailableLockerBoxException, NoAvailableLockerException, InvalidTicketException {
         Robot robot = new Robot();
-        Locker locker = new Locker(1);
-        robot.add(locker);
+        Locker locker1 = new Locker(0);
+        Locker locker2 = new Locker(1);
+        robot.add(locker1);
+        robot.add(locker2);
         Bag storedBag = new Bag();
-        Ticket  ticket = robot.store(storedBag);
+        Ticket ticket = robot.store(storedBag);
 
         Bag bag = robot.getBagWithTicket(ticket);
 
         Assertions.assertEquals(storedBag, bag);
+    }
+
+    @Test
+    void should_not_get_package_when_get_package_given_wrong_ticket()
+            throws NoAvailableLockerBoxException, NoAvailableLockerException {
+        Robot robot = new Robot();
+        Locker locker = new Locker(1);
+        robot.add(locker);
+        Bag storedBag = new Bag();
+        Ticket theRightTicket = robot.store(storedBag);
+        Ticket theWrongTicket = new Ticket();
+        Assertions.assertNotEquals(theRightTicket, theWrongTicket);
+
+        InvalidTicketException exception = Assertions.assertThrows(InvalidTicketException.class, () -> robot.getBagWithTicket(theWrongTicket));
+
+        assertEquals("Invalid Ticket", exception.getMessage());
     }
 }
