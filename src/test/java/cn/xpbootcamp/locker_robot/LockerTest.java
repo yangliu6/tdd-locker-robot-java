@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class LockerTest {
 
     @Test
-    void should_return_ticket_when_store_package_given_locker_is_available() throws NoAvailableLockerBoxException {
+    void should_return_ticket_when_store_package_given_locker_robot_is_available() throws NoAvailableLockerBoxException {
         Locker locker = new Locker(10);
         Bag bag = new Bag();
 
@@ -20,7 +20,7 @@ public class LockerTest {
     }
 
     @Test
-    void should_return_null_when_store_package_given_locker_is_not_available() throws NoAvailableLockerBoxException {
+    void should_return_null_when_store_package_given_locker_robot_is_not_available() throws NoAvailableLockerBoxException {
         Locker locker = new Locker(1);
         Bag bag = new Bag();
         Ticket ticket = locker.store(bag);
