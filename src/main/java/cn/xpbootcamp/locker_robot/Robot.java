@@ -33,4 +33,9 @@ public class Robot {
     public Locker getLockerWithTicket(Ticket ticket) {
         return ticketLockerMap.get(ticket);
     }
+
+    public Bag getBagWithTicket(Ticket ticket) throws InvalidTicketException {
+        Locker locker = ticketLockerMap.get(ticket);
+        return locker.takeOut(ticket);
+    }
 }
