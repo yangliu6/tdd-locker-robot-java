@@ -84,4 +84,20 @@ class RobotTest {
 
         assertEquals("Invalid Ticket", exception.getMessage());
     }
+
+    @Test
+    void should_not_get_package_when_get_package_given_expired_ticket()
+            throws NoAvailableLockerBoxException, NoAvailableLockerException, InvalidTicketException {
+        Robot robot = new Robot();
+        Locker locker = new Locker(1);
+        robot.add(locker);
+        Bag storedBag = new Bag();
+        Ticket theRightTicket = robot.store(storedBag);
+        Bag bag = robot.getBagWithTicket(theRightTicket);
+        assertEquals(storedBag, bag);
+
+        InvalidTicketException exception = Assertions.assertThrows(InvalidTicketException.class, () -> robot.getBagWithTicket(theRightTicket));
+
+        assertEquals("Invalid Ticket", exception.getMessage());
+    }
 }
