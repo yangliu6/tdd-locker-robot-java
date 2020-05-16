@@ -48,7 +48,7 @@ public class LockerTest {
         Bag bag = new Bag();
         Ticket ticket = locker.store(bag);
 
-        Ticket wrongTicket = new Ticket(ticket.getPassword()+ 1231);
+        Ticket wrongTicket = new Ticket();
 
         InvalidTicketException exception = Assertions.assertThrows(InvalidTicketException.class,() ->locker.takeOut(wrongTicket));
         assertEquals("Invalid Ticket", exception.getMessage());

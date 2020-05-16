@@ -8,7 +8,7 @@ import java.util.*;
 public class Locker {
 
     List<Box> boxes;
-    Map<String, Integer> keyStore;
+    Map<Ticket, Integer> keyStore;
 
     public Locker(int size) {
         boxes = new ArrayList<>(Collections.nCopies(size, new Box()));
@@ -32,20 +32,18 @@ public class Locker {
     }
 
     private Ticket generateTicket(int index) {
-        String key = UUID.randomUUID().toString();
-
-        keyStore.put(key, index);
-        return new Ticket(key);
+        Ticket ticket = new  Ticket();
+        keyStore.put(ticket, index);
+        return ticket;
     }
 
     public Bag takeOut(Ticket ticket) throws InvalidTicketException {
-        if (ticket == null || ticket.getPassword() == null)
+        if (ticket == null)
             throw new InvalidTicketException("Invalid Ticket");
 
-        String key = ticket.getPassword();
-        Integer index = keyStore.get(key);
+        Integer index = keyStore.get(ticket);
         if (index != null) {
-            keyStore.remove(key);
+            keyStore.remove(ticket);
             return boxes.get(index).takeOut();
         } else {
             throw new InvalidTicketException("Invalid Ticket");
