@@ -1,5 +1,7 @@
 package cn.xpbootcamp.locker_robot;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import cn.xpbootcamp.locker_robot.exception.NoAvailableLockerBoxException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -35,5 +37,18 @@ class RobotTest {
 
         Assertions.assertEquals(theSecondLocker, robot.getLockerWithTicket(ticket));
         Assertions.assertNotNull(ticket);
+    }
+
+    @Test
+    void should_warning_no_locker_available_when_store_package_given_no_available_lockers()
+            throws NoAvailableLockerException {
+        Robot robot = new Robot();
+        Locker locker = new Locker(0);
+        robot.add(locker);
+
+        Bag bag = new Bag();
+
+        NoAvailableLockerException exception = Assertions.assertThrows(NoAvailableLockerException.class, () -> robot.store(bag));
+        assertEquals("No locker available", exception.getMessage());
     }
 }

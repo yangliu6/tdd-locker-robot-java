@@ -6,7 +6,7 @@
 
    - [ ] Given Robot管理一个locker When 存包，Then 存包成功且出票
    - [ ] Given Robot管理多个lockers，When 存包，Then 包成功存入第一个有空闲的locker且出票
-   - [ ] Given Robot管理的lockers都满了，When 存包，Then 提示用户柜子满了，且不出票
+   - [ ] Given Robot管理的lockers都满了，When 存包，Then 提示用户柜子满了
 
 2. 取包
 
