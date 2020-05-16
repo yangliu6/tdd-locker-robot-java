@@ -49,4 +49,8 @@ public class Locker {
             throw new InvalidTicketException("Invalid Ticket");
         }
     }
+
+    public boolean isAvailable() {
+        return boxes.stream().anyMatch(Box::isAvailable);
+    }
 }

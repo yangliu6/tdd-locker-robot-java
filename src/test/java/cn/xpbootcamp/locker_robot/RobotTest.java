@@ -1,14 +1,14 @@
 package cn.xpbootcamp.locker_robot;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import cn.xpbootcamp.locker_robot.exception.NoAvailableLockerBoxException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class RobotTest {
 
     @Test
-    void should_return_ticket_when_store_package_given_robot_have_available_locker() {
+    void should_return_ticket_when_store_package_given_robot_have_available_locker()
+            throws NoAvailableLockerBoxException {
         Robot robot = new Robot();
         Locker locker = new Locker(5);
         robot.add(locker);
@@ -20,7 +20,8 @@ class RobotTest {
     }
 
     @Test
-    void should_store_into_the_first_available_locker_and_return_ticket_when_store_package_given_robot_have_many_available_lockers() {
+    void should_store_into_the_first_available_locker_and_return_ticket_when_store_package_given_robot_have_many_available_lockers()
+            throws NoAvailableLockerBoxException {
         Robot robot = new Robot();
         Locker theFirstLocker = new Locker(0);
         Locker theSecondLocker = new Locker(1);
