@@ -8,15 +8,10 @@ import java.util.*;
 public class Robot {
     List<Locker> lockers;
 
-    Map<Ticket, Locker> ticketLockerMap;
+    Map<Ticket, Locker> ticketLockerMap = new HashMap<>();
 
-    public Robot() {
-        lockers = new ArrayList<>();
-        ticketLockerMap = new HashMap<>();
-    }
-
-    public void add(Locker locker) {
-        lockers.add(locker);
+    public Robot(ArrayList lockers) {
+        this.lockers = lockers;
     }
 
     public Ticket store(Bag bag) throws NoAvailableLockerException, NoAvailableLockerBoxException {
@@ -30,9 +25,6 @@ public class Robot {
         throw new NoAvailableLockerException("No locker available");
     }
 
-    public Locker getLockerWithTicket(Ticket ticket) {
-        return ticketLockerMap.get(ticket);
-    }
 
     public Bag getBagWithTicket(Ticket ticket) throws InvalidTicketException {
         Locker locker = ticketLockerMap.get(ticket);

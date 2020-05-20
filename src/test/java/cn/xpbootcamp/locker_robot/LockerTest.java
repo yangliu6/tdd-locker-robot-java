@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class LockerTest {
 
     @Test
-    void should_return_ticket_when_store_package_given_locker_robot_is_available() throws NoAvailableLockerBoxException {
+    void should_return_ticket_when_store_bag_given_locker_robot_is_available() throws NoAvailableLockerBoxException {
         Locker locker = new Locker(10);
         Bag bag = new Bag();
 
@@ -20,7 +20,7 @@ public class LockerTest {
     }
 
     @Test
-    void should_return_null_when_store_package_given_locker_robot_is_not_available() throws NoAvailableLockerBoxException {
+    void should_return_null_when_store_bag_given_locker_robot_is_not_available() throws NoAvailableLockerBoxException {
         Locker locker = new Locker(1);
         Bag bag = new Bag();
         Ticket ticket = locker.store(bag);
@@ -32,7 +32,7 @@ public class LockerTest {
     }
 
     @Test
-    void should_return_package_when_get_package_given_right_ticket() throws NoAvailableLockerBoxException, InvalidTicketException {
+    void should_return_bag_when_get_bag_given_right_ticket() throws NoAvailableLockerBoxException, InvalidTicketException {
         Locker locker = new Locker(10);
         Bag bag1 = new Bag();
         Ticket ticket = locker.store(bag1);
@@ -43,7 +43,7 @@ public class LockerTest {
     }
 
     @Test
-    void should_not_get_package_when_get_package_given_wrong_ticket() throws NoAvailableLockerBoxException {
+    void should_not_get_bag_when_get_bag_given_wrong_ticket() throws NoAvailableLockerBoxException {
         Locker locker = new Locker(10);
         Bag bag = new Bag();
         Ticket ticket = locker.store(bag);
@@ -55,7 +55,7 @@ public class LockerTest {
     }
 
     @Test
-    void should_not_get_package_when_get_package_given_expired_ticket() throws NoAvailableLockerBoxException {
+    void should_not_get_bag_when_get_bag_given_expired_ticket() throws NoAvailableLockerBoxException {
         Locker locker = new Locker(10);
         Bag bag = new Bag();
         Ticket ticket = locker.store(bag);
