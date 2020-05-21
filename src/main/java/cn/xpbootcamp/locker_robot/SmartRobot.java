@@ -17,12 +17,19 @@ public class SmartRobot {
     }
 
     public Ticket store(Bag bag) throws NoAvailableLockerBoxException {
+        int maxCapacity = 0;
+        Locker storedLocker = lockers.get(0);
         for (Locker locker : lockers) {
-            if (locker.isAvailable()) {
-                Ticket ticket = locker.store(bag);
-                ticketLockerMap.put(ticket, locker);
-                return ticket;
+            int capacity = locker.boxes.size() - locker.keyStore.size();
+            if (capacity > maxCapacity) {
+                maxCapacity = capacity;
+                storedLocker = locker;
             }
+        }
+        if(storedLocker.isAvailable()){
+            Ticket ticket = storedLocker.store(bag);
+            ticketLockerMap.put(ticket, storedLocker);
+            return ticket;
         }
         return null;
     }
