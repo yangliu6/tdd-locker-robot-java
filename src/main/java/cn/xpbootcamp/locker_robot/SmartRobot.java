@@ -13,7 +13,7 @@ public class SmartRobot {
     List<Locker> lockers;
     Map<Ticket, Locker> ticketLockerMap = new HashMap<>();
 
-    public SmartRobot(ArrayList lockers) {
+    public SmartRobot(List lockers) {
         this.lockers = lockers;
     }
 
