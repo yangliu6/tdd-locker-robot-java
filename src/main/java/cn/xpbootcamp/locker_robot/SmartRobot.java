@@ -1,5 +1,6 @@
 package cn.xpbootcamp.locker_robot;
 
+import cn.xpbootcamp.locker_robot.exception.InvalidTicketException;
 import cn.xpbootcamp.locker_robot.exception.NoAvailableLockerBoxException;
 import cn.xpbootcamp.locker_robot.exception.NoAvailableLockerException;
 
@@ -32,5 +33,10 @@ public class SmartRobot {
             return ticket;
         }
         throw new NoAvailableLockerException("No locker available");
+    }
+
+    public Bag getBagWithTicket(Ticket ticket) throws InvalidTicketException {
+        Locker locker = ticketLockerMap.get(ticket);
+        return locker.takeOut(ticket);
     }
 }

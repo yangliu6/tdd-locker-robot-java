@@ -1,5 +1,6 @@
 package cn.xpbootcamp.locker_robot;
 
+import cn.xpbootcamp.locker_robot.exception.InvalidTicketException;
 import cn.xpbootcamp.locker_robot.exception.NoAvailableLockerBoxException;
 import cn.xpbootcamp.locker_robot.exception.NoAvailableLockerException;
 import org.junit.jupiter.api.Assertions;
@@ -75,7 +76,7 @@ public class SmartRobotTest {
     }
 
     @Test
-    void should_return_bag_in_small_capacity_locker_when_get_bag_given_right_ticket() throws NoAvailableLockerBoxException, NoAvailableLockerException {
+    void should_return_bag_in_small_capacity_locker_when_get_bag_given_right_ticket() throws NoAvailableLockerBoxException, NoAvailableLockerException, InvalidTicketException {
         ArrayList<Locker> lockers = new ArrayList<>();
         Locker locker1 = new Locker(5);
         Locker locker2 = new Locker(5);
