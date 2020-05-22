@@ -10,7 +10,8 @@ import java.util.ArrayList;
 public class SmartRobotTest {
 
     @Test
-    void should_store_in_first_locker_and_return_ticket_when_store_bag_given_locker_capacity_are_5_and_4_respectively() throws NoAvailableLockerBoxException {
+    void should_store_in_first_locker_and_return_ticket_when_store_bag_given_locker_capacity_are_5_and_4_respectively()
+            throws NoAvailableLockerBoxException, NoAvailableLockerException {
         ArrayList<Locker> lockers = new ArrayList<>();
         Locker locker1 = new Locker(5);
         Locker locker2 = new Locker(4);
@@ -26,7 +27,8 @@ public class SmartRobotTest {
     }
 
     @Test
-    void should_store_in_second_locker_and_return_ticket_when_store_bag_given_locker_capacity_are_4_and_5_respectively() throws NoAvailableLockerBoxException {
+    void should_store_in_second_locker_and_return_ticket_when_store_bag_given_locker_capacity_are_4_and_5_respectively()
+            throws NoAvailableLockerBoxException, NoAvailableLockerException {
         ArrayList<Locker> lockers = new ArrayList<>();
         Locker locker1 = new Locker(4);
         Locker locker2 = new Locker(5);
@@ -42,7 +44,8 @@ public class SmartRobotTest {
     }
 
     @Test
-    void should_store_in_first_locker_and_return_ticket_when_store_bag_given_locker_capacity_are_5_5_and_4_respectively() throws NoAvailableLockerBoxException {
+    void should_store_in_first_locker_and_return_ticket_when_store_bag_given_locker_capacity_are_5_5_and_4_respectively()
+            throws NoAvailableLockerBoxException, NoAvailableLockerException {
         ArrayList<Locker> lockers = new ArrayList<>();
         Locker locker1 = new Locker(5);
         Locker locker2 = new Locker(5);
@@ -71,4 +74,19 @@ public class SmartRobotTest {
         Assertions.assertThrows(NoAvailableLockerException.class, () -> smartRobot.store(bag));
     }
 
+    @Test
+    void should_return_bag_in_small_capacity_locker_when_get_bag_given_right_ticket() throws NoAvailableLockerBoxException, NoAvailableLockerException {
+        ArrayList<Locker> lockers = new ArrayList<>();
+        Locker locker1 = new Locker(5);
+        Locker locker2 = new Locker(5);
+        lockers.add(locker1);
+        lockers.add(locker2);
+        SmartRobot smartRobot = new SmartRobot(lockers);
+        Bag storedBag = new Bag();
+        Ticket ticket = smartRobot.store(storedBag);
+
+        Bag bag = smartRobot.getBagWithTicket(ticket);
+
+        Assertions.assertEquals(storedBag,bag);
+    }
 }

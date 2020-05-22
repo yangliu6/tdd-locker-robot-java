@@ -16,7 +16,7 @@ public class SmartRobot {
         this.lockers = lockers;
     }
 
-    public Ticket store(Bag bag) throws NoAvailableLockerBoxException {
+    public Ticket store(Bag bag) throws NoAvailableLockerBoxException, NoAvailableLockerException {
         int maxCapacity = 0;
         Locker storedLocker = lockers.get(0);
         for (Locker locker : lockers) {
@@ -31,6 +31,6 @@ public class SmartRobot {
             ticketLockerMap.put(ticket, storedLocker);
             return ticket;
         }
-        return null;
+        throw new NoAvailableLockerException("No locker available");
     }
 }
