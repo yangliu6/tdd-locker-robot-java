@@ -1,6 +1,7 @@
 package cn.xpbootcamp.locker_robot;
 
 import cn.xpbootcamp.locker_robot.exception.NoAvailableLockerBoxException;
+import cn.xpbootcamp.locker_robot.exception.NoAvailableLockerException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -57,4 +58,17 @@ public class SmartRobotTest {
         Assertions.assertNotNull(ticket);
         Assertions.assertEquals(locker1,smartRobot.ticketLockerMap.get(ticket));
     }
+
+    @Test
+    void should_warning_no_locker_available_when_store_bag_given_no_available_lockers() {
+        ArrayList<Locker> lockers = new ArrayList<>();
+        Locker locker = new Locker(0);
+        lockers.add(locker);
+        SmartRobot smartRobot = new SmartRobot(lockers);
+
+        Bag bag = new Bag();
+
+        Assertions.assertThrows(NoAvailableLockerException.class, () -> smartRobot.store(bag));
+    }
+
 }

@@ -12,5 +12,5 @@
 2. 取包
 
    - [ ] Given 提供正确的Ticket给Robot, When 取包, Then 成功取出容量较低的柜子里存的对应的包
-   - [ ] Given 提供正确的Ticket给Robot, When 取包, Then 成功取出容量较低的柜子里存的对应的包
+   - [ ] Given 提供正确的Ticket给Robot, When 取包, Then 成功取出容量较高的柜子里存的对应的包
    - [ ] Given给的Ticket是伪造的 When取包 Then 无法取包并提示无效票
