@@ -4,19 +4,22 @@ import cn.xpbootcamp.locker_robot.exception.InvalidTicketException;
 import cn.xpbootcamp.locker_robot.exception.NoAvailableLockerBoxException;
 import cn.xpbootcamp.locker_robot.exception.NoAvailableLockerException;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-public class SmartRobot implements Robot{
+public class SuperRobot implements Robot{
 
     List<Locker> lockers;
 
-    public SmartRobot(List lockers) {
+    public SuperRobot(List lockers) {
         this.lockers = lockers;
     }
 
     @Override
-    public Ticket store(Bag bag) throws NoAvailableLockerBoxException, NoAvailableLockerException {
-        Locker locker = this.lockers.stream().max(Comparator.comparing(Locker::getAvailableCapacity)).get();
+    public Ticket store(Bag bag) throws NoAvailableLockerException, NoAvailableLockerBoxException {
+        Locker locker = this.lockers.stream().max(Comparator.comparing(Locker::getVacancyRate)).get();
         if (locker.isAvailable()) {
             Ticket ticket = locker.store(bag);
             this.ticketLockerMap.put(ticket, locker);

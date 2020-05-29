@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-class RobotTest {
+class LockerRobotTest {
 
     @Test
     void should_return_ticket_when_store_bag_given_robot_have_available_locker()
@@ -18,12 +18,12 @@ class RobotTest {
         ArrayList<Locker> lockers = new ArrayList<>();
         Locker locker = new Locker(5);
         lockers.add(locker);
-        Robot robot = new Robot(lockers);
+        LockerRobot lockerRobot = new LockerRobot(lockers);
 //        Locker locker = new Locker(5);
 //        robot.add(locker);
 
         Bag bag = new Bag();
-        Ticket ticket = robot.store(bag);
+        Ticket ticket = lockerRobot.store(bag);
 
         Assertions.assertNotNull(ticket);
     }
@@ -38,13 +38,13 @@ class RobotTest {
         lockers.add(theFirstLocker);
         lockers.add(theSecondLocker);
         lockers.add(theThirdLocker);
-        Robot robot = new Robot(lockers);
+        LockerRobot lockerRobot = new LockerRobot(lockers);
 
 
         Bag bag = new Bag();
-        Ticket ticket = robot.store(bag);
+        Ticket ticket = lockerRobot.store(bag);
 
-        Assertions.assertEquals(theSecondLocker, robot.ticketLockerMap.get(ticket));
+        Assertions.assertEquals(theSecondLocker, lockerRobot.ticketLockerMap.get(ticket));
         Assertions.assertNotNull(ticket);
     }
 
@@ -53,11 +53,11 @@ class RobotTest {
         ArrayList<Locker> lockers = new ArrayList<>();
         Locker locker = new Locker(0);
         lockers.add(locker);
-        Robot robot = new Robot(lockers);
+        LockerRobot lockerRobot = new LockerRobot(lockers);
 
         Bag bag = new Bag();
 
-        NoAvailableLockerException exception = Assertions.assertThrows(NoAvailableLockerException.class, () -> robot.store(bag));
+        NoAvailableLockerException exception = Assertions.assertThrows(NoAvailableLockerException.class, () -> lockerRobot.store(bag));
     }
 
     @Test
@@ -67,11 +67,11 @@ class RobotTest {
         ArrayList<Locker> lockers = new ArrayList<>();
         Locker locker1 = new Locker(1);
         lockers.add(locker1);
-        Robot robot = new Robot(lockers);
+        LockerRobot lockerRobot = new LockerRobot(lockers);
         Bag storedBag = new Bag();
-        Ticket ticket = robot.store(storedBag);
+        Ticket ticket = lockerRobot.store(storedBag);
 
-        Bag bag = robot.getBagWithTicket(ticket);
+        Bag bag = lockerRobot.getBagWithTicket(ticket);
 
         Assertions.assertEquals(storedBag, bag);
     }
@@ -84,11 +84,11 @@ class RobotTest {
         Locker locker2 = new Locker(1);
         lockers.add(locker1);
         lockers.add(locker2);
-        Robot robot = new Robot(lockers);
+        LockerRobot lockerRobot = new LockerRobot(lockers);
         Bag storedBag = new Bag();
-        Ticket ticket = robot.store(storedBag);
+        Ticket ticket = lockerRobot.store(storedBag);
 
-        Bag bag = robot.getBagWithTicket(ticket);
+        Bag bag = lockerRobot.getBagWithTicket(ticket);
 
         Assertions.assertEquals(storedBag, bag);
     }
@@ -99,13 +99,13 @@ class RobotTest {
         ArrayList<Locker> lockers = new ArrayList<>();
         Locker locker = new Locker(1);
         lockers.add(locker);
-        Robot robot = new Robot(lockers);
+        LockerRobot lockerRobot = new LockerRobot(lockers);
         Bag storedBag = new Bag();
-        Ticket theRightTicket = robot.store(storedBag);
+        Ticket theRightTicket = lockerRobot.store(storedBag);
         Ticket theWrongTicket = new Ticket();
         Assertions.assertNotEquals(theRightTicket, theWrongTicket);
 
-        InvalidTicketException exception = Assertions.assertThrows(InvalidTicketException.class, () -> robot.getBagWithTicket(theWrongTicket));
+        InvalidTicketException exception = Assertions.assertThrows(InvalidTicketException.class, () -> lockerRobot.getBagWithTicket(theWrongTicket));
     }
 
     @Test
@@ -114,12 +114,12 @@ class RobotTest {
         ArrayList<Locker> lockers = new ArrayList<>();
         Locker locker = new Locker(1);
         lockers.add(locker);
-        Robot robot = new Robot(lockers);
+        LockerRobot lockerRobot = new LockerRobot(lockers);
         Bag storedBag = new Bag();
-        Ticket theRightTicket = robot.store(storedBag);
-        Bag bag = robot.getBagWithTicket(theRightTicket);
+        Ticket theRightTicket = lockerRobot.store(storedBag);
+        Bag bag = lockerRobot.getBagWithTicket(theRightTicket);
         assertEquals(storedBag, bag);
 
-        InvalidTicketException exception = Assertions.assertThrows(InvalidTicketException.class, () -> robot.getBagWithTicket(theRightTicket));
+        InvalidTicketException exception = Assertions.assertThrows(InvalidTicketException.class, () -> lockerRobot.getBagWithTicket(theRightTicket));
     }
 }

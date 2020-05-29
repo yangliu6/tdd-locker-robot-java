@@ -53,4 +53,19 @@ public class Locker {
     public boolean isAvailable() {
         return boxes.stream().anyMatch(Box::isAvailable);
     }
+
+    public int getAvailableCapacity() {
+        return (int) this.boxes.stream().filter(Box::isAvailable).count();
+    }
+
+    public float getVacancyRate(){
+        float vacancyRate;
+        if(boxes.size() != 0){
+            vacancyRate = (boxes.size()-keyStore.size())/boxes.size();
+        }
+        else {
+            vacancyRate = 0;
+        }
+        return vacancyRate;
+    }
 }
